@@ -1,165 +1,437 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>14 August Special — Sohni Dharti</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>14 August — Anas Mughal & Mian Hassan (Premium)</title>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <style>
-  body {
-    margin: 0;
-    background: black;
-    color: white;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-    text-align: center;
+  /* ---------- Variables & base ---------- */
+  :root{
+    --bg-top: #052a12;
+    --bg-bottom: #083b1a;
+    --accent: #00b159;
+    --white: #ffffff;
+    --glass: rgba(255,255,255,0.06);
+    --card-shadow: 0 18px 50px rgba(0,0,0,0.6);
+    --glass-2: rgba(255,255,255,0.03);
   }
-  canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{
+    background: linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
+    color:var(--white);
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    overflow:hidden;
   }
-  #flag {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 2px solid white;
+
+  /* ---------- Container ---------- */
+  .wrapper{
+    width:100%;
+    max-width:1100px;
+    border-radius:18px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow:var(--card-shadow);
+    overflow:hidden;
+    position:relative;
   }
-  h1 {
-    margin-top: 150px;
-    font-size: 2em;
-    color: #00ff99;
+  header{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    padding:22px;
   }
-  #countdown {
-    font-size: 3em;
-    color: yellow;
-    margin-top: 10px;
+  .flag{
+    width:160px;
+    height:95px;
+    border-radius:10px;
+    overflow:hidden;
+    transform-origin:center;
+    animation:flagWave 3s ease-in-out infinite;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    border:1px solid rgba(255,255,255,0.04);
+    background:linear-gradient(180deg, rgba(0,0,0,0.12), rgba(255,255,255,0.02));
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
-  #overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
+  @keyframes flagWave{
+    0%{transform:rotate(-2deg) translateY(0)}
+    50%{transform:rotate(2deg) translateY(-4px)}
+    100%{transform:rotate(-2deg) translateY(0)}
   }
-  #overlay button {
-    padding: 12px 20px;
-    font-size: 1.1em;
-    background: #00ff99;
-    color: black;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 20px;
+  header h1{margin:0;font-size:24px;letter-spacing:0.3px}
+  .sub{color:#cfe8d2;font-size:13px;margin-top:6px}
+
+  /* ---------- Main layout ---------- */
+  .main{
+    display:flex;
+    gap:18px;
+    padding:18px;
+  }
+  .left{
+    flex:1;
+    border-radius:12px;
+    padding:18px;
+    position:relative;
+    min-height:420px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
+  }
+  .right{
+    width:320px;
+    min-width:220px;
+    padding:18px;
+    border-radius:12px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:stretch;
+  }
+
+  /* ---------- Countdown ---------- */
+  .title-row{display:flex;justify-content:space-between;align-items:center}
+  .big-title{font-size:36px;font-weight:700}
+  .countdown{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+    justify-content:center;
+    align-items:center;
+  }
+  .led{
+    background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(255,255,255,0.02));
+    padding:14px 22px;
+    border-radius:12px;
+    min-width:120px;
+    text-align:center;
+    font-weight:800;
+    letter-spacing:2px;
+    font-size:36px;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.55), inset 0 -4px 14px rgba(0,0,0,0.25);
+  }
+
+  /* ---------- People cards ---------- */
+  .people{
+    display:flex;
+    gap:12px;
+    margin-top:14px;
+  }
+  .person{
+    flex:1;
+    background:var(--glass);
+    border-radius:10px;
+    padding:12px;
+    text-align:center;
+    transition: transform .28s ease, box-shadow .28s ease, border .28s ease;
+    border:1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(4px);
+  }
+  .person strong{display:block;font-size:16px}
+  .person .role{font-size:12px;color:#d6e7cf;margin-top:6px}
+  .person.active{
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    border:1px solid rgba(255,255,255,0.12);
+  }
+
+  /* ---------- Speech bubble ---------- */
+  .speech{
+    position:absolute;
+    left:26px;
+    bottom:26px;
+    max-width:58%;
+    background: linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
+    padding:14px 16px;
+    border-radius:14px;
+    display:none;
+    border:1px solid rgba(255,255,255,0.06);
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  }
+  .speech.show{display:block; animation:pop .36s cubic-bezier(.2,.9,.3,1)}
+  @keyframes pop{from{transform:translateY(8px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+
+  /* ---------- Controls ---------- */
+  .controls{display:flex;flex-direction:column;gap:10px}
+  .btn{
+    width:100%;
+    padding:12px 14px;
+    border-radius:12px;
+    border:0;
+    font-weight:800;
+    cursor:pointer;
+    background: linear-gradient(180deg,#0cb34a,#068036);
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,0.45);
+  }
+  .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.08);font-weight:700}
+  button[disabled]{opacity:0.5;cursor:not-allowed}
+
+  /* ---------- Canvas fireworks styling ---------- */
+  #fx{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
+
+  /* ---------- small note ---------- */
+  .note{font-size:13px;color:#cfe8d2;opacity:0.95}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:880px){
+    .main{flex-direction:column}
+    .right{width:100%}
+    .speech{max-width:calc(100% - 32px);left:16px;right:16px}
+    .big-title{font-size:20px}
+    .led{font-size:28px;min-width:90px;padding:10px 12px}
   }
 </style>
 </head>
 <body>
+  <div class="wrapper" role="main" aria-label="14 August premium animation">
+    <header>
+      <div class="flag" aria-hidden="true">
+        <!-- Pakistan flag SVG -->
+        <svg viewBox="0 0 30 20" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%;display:block;">
+          <rect width="30" height="20" fill="#006400"/>
+          <rect x="21" width="9" height="20" fill="#fff"/>
+          <circle cx="12.3" cy="10" r="4.2" fill="#fff"/>
+          <path d="M13.4 7.4 A4.5 4.5 0 0 0 13.4 12.6 L12.4 10 A2.4 2.4 0 0 1 12.4 9z" fill="#006400"/>
+          <g transform="translate(15,10)"><polygon points="0,-3 0.9,-1 3,-1 1.3,0.2 2.3,2.8 0,1.2 -2.3,2.8 -1.3,0.2 -3,-1 -0.9,-1" fill="#fff"/></g>
+        </svg>
+      </div>
+      <div>
+        <h1>Happy Independence Day</h1>
+        <div class="sub">14 August • Pakistan Zindabad 🇵🇰</div>
+      </div>
+    </header>
 
-<canvas id="fireworks"></canvas>
-<img id="flag" src="https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg" width="200">
+    <div class="main">
+      <div class="left" id="left">
+        <div class="title-row">
+          <div class="big-title">14 August • Pakistan</div>
+          <div class="note">Mobile-friendly • Tap <strong>Start Celebration</strong> to play anthem</div>
+        </div>
 
-<div id="overlay">
-  <h1>🎆 14 August — Sohni Dharti Special 🎆</h1>
-  <p>Designed by <strong>Anas Mughal</strong></p>
-  <button id="startBtn">START SHOW</button>
-</div>
+        <div class="people" aria-hidden="true">
+          <div class="person" id="person1"><strong>Anas Mughal</strong><div class="role">Representative</div></div>
+          <div class="person" id="person2"><strong>Mian Hassan</strong><div class="role">Representative</div></div>
+        </div>
 
-<h1>🇵🇰 Happy Independence Day! 🇵🇰</h1>
-<p>Designed by Anas Mughal</p>
-<div id="countdown">60</div>
+        <div class="countdown" aria-live="polite" style="margin-top:18px;">
+          <div class="led" id="countDisplay">01:00</div>
+        </div>
 
-<audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
+        <div class="speech" id="speech" role="status" aria-atomic="true">
+          <strong id="speaker">Anas Mughal</strong>
+          <div id="speechText" style="margin-top:6px;font-size:14px;color:#dbeed7">...speaking now</div>
+        </div>
+
+        <canvas id="fx"></canvas>
+      </div>
+
+      <aside class="right" aria-hidden="false">
+        <div class="controls">
+          <button id="startBtn" class="btn">Start Celebration</button>
+          <button id="burstBtn" class="btn secondary">Burst Fireworks Now</button>
+          <button id="exitBtn" class="btn secondary" disabled>Exit</button>
+          <div style="height:8px"></div>
+          <div class="note">If audio is blocked by browser, tap <em>Start Celebration</em> once — that user gesture allows playback.</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Online instrumental anthem (Wikimedia Commons public resource) -->
+  <audio id="anthem" preload="auto" crossorigin="anonymous">
+    <source src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Pakistani_national_anthem%2C_performed_by_the_USN_Band.mp3" type="audio/mpeg">
+    <!-- fallback: user will need to provide audio if link unreachable -->
+  </audio>
 
 <script>
-// Fireworks effect
-const canvas = document.getElementById('fireworks');
-const ctx = canvas.getContext('2d');
-let particles = [];
+/* ---------- Configuration ---------- */
+const COUNTDOWN_SECONDS = 60;   // change to adjust countdown length
+const ANAS_SPEAK_SECONDS = 10;
+const HASSAN_SPEAK_SECONDS = 10;
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+/* ---------- Elements ---------- */
+const startBtn = document.getElementById('startBtn');
+const burstBtn = document.getElementById('burstBtn');
+const exitBtn = document.getElementById('exitBtn');
+const countDisplay = document.getElementById('countDisplay');
+const anthem = document.getElementById('anthem');
+const speech = document.getElementById('speech');
+const speaker = document.getElementById('speaker');
+const speechText = document.getElementById('speechText');
+const person1 = document.getElementById('person1');
+const person2 = document.getElementById('person2');
+
+/* ---------- State ---------- */
+let timeLeft = COUNTDOWN_SECONDS;
+let timerID = null;
+countDisplay.textContent = formatTime(timeLeft);
+
+/* ---------- Format mm:ss ---------- */
+function formatTime(s){
+  const mm = String(Math.floor(s/60)).padStart(2,'0');
+  const ss = String(s%60).padStart(2,'0');
+  return `${mm}:${ss}`;
 }
+
+/* ---------- Start Button ---------- */
+startBtn.addEventListener('click', async () => {
+  startBtn.disabled = true;
+  // attempt to play anthem (user gesture is present here)
+  try {
+    anthem.currentTime = 0;
+    await anthem.play();
+  } catch(e){
+    console.warn('Audio play blocked:', e);
+  }
+
+  if (timerID) return;
+  timerID = setInterval(() => {
+    timeLeft--;
+    countDisplay.textContent = formatTime(timeLeft);
+    if (timeLeft % 12 === 0) burstFirework();
+    if (timeLeft <= 0) {
+      clearInterval(timerID);
+      timerID = null;
+      onCountdownEnd();
+    }
+  }, 1000);
+
+  // auto periodic bursts
+  if (!window._autoBurst) {
+    window._autoBurst = setInterval(()=> { if (timeLeft>0) burstFirework(false); }, 11000);
+  }
+});
+
+/* ---------- Exit behavior ---------- */
+exitBtn.addEventListener('click', () => {
+  if (timeLeft <= 0) document.querySelector('.wrapper').style.display = 'none';
+});
+
+/* ---------- On countdown end ---------- */
+function onCountdownEnd(){
+  // stop anthem
+  try{ anthem.pause(); anthem.currentTime = 0; } catch(e){}
+
+  // enable exit
+  exitBtn.disabled = false;
+  exitBtn.classList.remove('secondary');
+  exitBtn.classList.add('btn');
+
+  // big final firework burst
+  burstFirework(true);
+
+  // show Anas then Hassan sequentially
+  showSpeaker('Anas Mughal', 'Assalam-o-Alaikum! Happy Independence Day to everyone. Let’s celebrate with unity and pride.', ANAS_SPEAK_SECONDS)
+    .then(()=> showSpeaker('Mian Hassan', 'Pakistan Zindabad! May peace and progress be with our nation.', HASSAN_SPEAK_SECONDS))
+    .then(()=> hideSpeech());
+}
+
+/* ---------- Show speaker (promise) ---------- */
+function showSpeaker(name, text, seconds){
+  return new Promise(resolve => {
+    speaker.textContent = name;
+    speechText.textContent = text;
+    speech.classList.add('show');
+    // highlight person card
+    person1.classList.toggle('active', name.includes('Anas'));
+    person2.classList.toggle('active', name.includes('Hassan'));
+    setTimeout(()=> {
+      person1.classList.remove('active');
+      person2.classList.remove('active');
+      resolve();
+    }, seconds*1000);
+  });
+}
+function hideSpeech(){ speech.classList.remove('show'); }
+
+/* ---------- Burst button ---------- */
+burstBtn.addEventListener('click', ()=> burstFirework(true));
+
+/* ---------- Fireworks / Confetti Canvas System ---------- */
+const canvas = document.getElementById('fx');
+const ctx = canvas.getContext('2d');
+function resizeCanvas(){ canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
-function createParticle() {
-  const x = Math.random() * canvas.width;
-  const y = Math.random() * canvas.height / 2;
-  const radius = Math.random() * 3 + 2;
-  const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-  const speedX = (Math.random() - 0.5) * 4;
-  const speedY = (Math.random() - 0.5) * 4;
-  particles.push({ x, y, radius, color, speedX, speedY, alpha: 1 });
-}
+let sparks = [], confetti = [];
+function rnd(a,b){ return Math.random()*(b-a)+a; }
 
-function updateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  particles.forEach((p, i) => {
-    p.x += p.speedX;
-    p.y += p.speedY;
-    p.alpha -= 0.01;
-    if (p.alpha <= 0) {
-      particles.splice(i, 1);
-    }
-    ctx.globalAlpha = p.alpha;
-    ctx.fillStyle = p.color;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-    ctx.fill();
-  });
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-  if (Math.random() < 0.1) {
-    for (let i = 0; i < 50; i++) createParticle();
+function burstFirework(large=false){
+  const cx = rnd(canvas.width*0.2, canvas.width*0.8);
+  const cy = rnd(50, canvas.height*0.5);
+  // sparks
+  const pieces = large ? 130 : 48;
+  for(let i=0;i<pieces;i++){
+    const angle = Math.random()*Math.PI*2;
+    const speed = rnd(1.5,6);
+    sparks.push({
+      x:cx, y:cy,
+      vx: Math.cos(angle)*speed,
+      vy: Math.sin(angle)*speed,
+      life: rnd(40,110), age:0,
+      size: rnd(1,3),
+      hue: Math.floor(rnd(60,160))
+    });
   }
-  updateParticles();
-}
-animate();
-
-// Countdown
-let countdownInterval;
-function startCountdown() {
-  let timeLeft = 60;
-  document.getElementById('countdown').textContent = timeLeft;
-  countdownInterval = setInterval(() => {
-    timeLeft--;
-    document.getElementById('countdown').textContent = timeLeft;
-    if (timeLeft <= 0) {
-      clearInterval(countdownInterval);
-      allowExit = true;
-      alert("🎉 Happy Independence Day from Anas Mughal! 🎉");
-    }
-  }, 1000);
+  // confetti
+  for(let j=0;j<(large?90:24);j++){
+    confetti.push({
+      x: rnd(0,canvas.width),
+      y: -10,
+      vx: rnd(-1.5,1.5),
+      vy: rnd(0.8,3),
+      rot: rnd(0,Math.PI*2),
+      vr: rnd(-0.05,0.05),
+      w: rnd(6,14),
+      h: rnd(8,16),
+      life: rnd(140,300),
+      age: 0,
+      color: `hsl(${Math.floor(rnd(100,160))}, 70%, 55%)`
+    });
+  }
 }
 
-// Prevent exit feeling
-let allowExit = false;
-window.onbeforeunload = function() {
-  if (!allowExit) return "Please wait until the celebration is complete!";
-};
-document.addEventListener('contextmenu', e => {
-  if (!allowExit) e.preventDefault();
-});
-history.pushState(null, null, location.href);
-window.addEventListener('popstate', function() {
-  if (!allowExit) history.pushState(null, null, location.href);
-});
+function loop(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-// Start button
-document.getElementById('startBtn').addEventListener('click', () => {
-  document.getElementById('overlay').style.display = 'none';
-  const music = document.getElementById('bgMusic');
-  music.play();
-  startCountdown();
-});
+  // sparks
+  for(let i=sparks.length-1;i>=0;i--){
+    const s = sparks[i];
+    s.vy += 0.03; s.x += s.vx; s.y += s.vy; s.age++;
+    ctx.globalAlpha = Math.max(0,1 - s.age/s.life);
+    ctx.fillStyle = `hsl(${s.hue},80%,60%)`;
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.size,0,Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
+    if (s.age > s.life) sparks.splice(i,1);
+  }
+
+  // confetti
+  for(let i=confetti.length-1;i>=0;i--){
+    const p = confetti[i];
+    p.vy += 0.02; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.age++;
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+    ctx.globalAlpha = Math.max(0,1 - p.age/p.life);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+    ctx.restore(); ctx.globalAlpha = 1;
+    if (p.age > p.life || p.y > canvas.height + 40) confetti.splice(i,1);
+  }
+
+  requestAnimationFrame(loop);
+}
+loop();
+
+/* Accessibility: allow space to start */
+window.addEventListener('keydown', (e) => { if (e.code === 'Space') startBtn.click(); });
+
+/* Optional: small auto-burst on load (commented) */
+// setTimeout(()=> burstFirework(false), 1200);
 </script>
-
 </body>
 </html>

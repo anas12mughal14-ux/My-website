@@ -1,221 +1,165 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>14 August — Full-screen Prank (Safe)</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14 August Special — Sohni Dharti</title>
 <style>
-  :root{
-    --bg1:#001913; --bg2:#03120f; --accent:#00a86b; --white:#fff;
-    --muted:#9fbfb0; --mono: "Courier New", monospace;
+  body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    text-align: center;
   }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:var(--mono);background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--white);-webkit-font-smoothing:antialiased}
-  .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:18px}
-  .card{width:100%;max-width:980px;background:rgba(255,255,255,0.02);border-radius:12px;padding:14px;box-shadow:0 12px 40px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
-  header{display:flex;gap:12px;align-items:center;margin-bottom:10px}
-  .dot{width:12px;height:12px;border-radius:3px;background:linear-gradient(90deg,var(--accent),#2fe4a6)}
-  h1{margin:0;font-size:18px}
-  p.sub{margin:0;color:var(--muted);font-size:13px}
-  .terminal{background:rgba(1,4,6,0.55);border-radius:10px;padding:12px;color:#c9fff0;min-height:200px;max-height:60vh;overflow:auto;border:1px solid rgba(255,255,255,0.02)}
-  .line{white-space:pre-wrap;font-size:15px;line-height:1.45}
-  .controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;justify-content:center}
-  button{flex:1 1 120px;min-width:110px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--white);font-family:var(--mono);font-size:14px;cursor:pointer}
-  button.primary{background:linear-gradient(90deg,var(--accent),#26d6a0);border:none;color:#022}
-  .flagMini{height:72px;border-radius:8px;background:linear-gradient(180deg,#085f3f,#046447);position:relative;margin-top:10px}
-  .cres{position:absolute;left:18%;top:22%;width:46px;height:46px;border-radius:50%;background:var(--white);transform:rotate(-12deg)}
-  .cres::after{content:"";position:absolute;left:12px;top:6px;width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,#085f3f,#046447)}
-  .starMini{position:absolute;left:38%;top:18%;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:14px solid var(--white);transform:rotate(32deg)}
-  .big-banner{margin-top:12px;padding:14px;border-radius:10px;text-align:center;font-weight:700;font-size:18px;color:#012b1f;background:linear-gradient(90deg,#bfffe8,#e8fff9)}
-  footer{margin-top:12px;color:var(--muted);font-size:12px;text-align:center}
-  /* FULLSCREEN OVERLAY */
-  #prankOverlay{
-    position:fixed; inset:0; background:linear-gradient(180deg,#00220f,#00120a); z-index:99999;
-    display:flex;align-items:center;justify-content:center;flex-direction:column; gap:18px;
-    color:var(--white); text-align:center; padding:20px; pointer-events:auto;
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
   }
-  #count{font-family:var(--mono); font-size:44px; letter-spacing:4px; background:rgba(255,255,255,0.03); padding:18px 28px; border-radius:12px}
-  #overlayMsg{max-width:760px; font-size:20px; line-height:1.4; color:#dff7ee; padding:12px; border-radius:10px; background:rgba(0,168,107,0.06)}
-  #closeBtn{margin-top:14px; padding:10px 18px; border-radius:10px; border:none; background:#fff; color:#012a1f; font-weight:700; cursor:pointer}
-  /* disable pointer events when overlay active - handled by JS */
-  @media (max-width:420px){ #count{font-size:36px} #overlayMsg{font-size:16px} }
+  #flag {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid white;
+  }
+  h1 {
+    margin-top: 150px;
+    font-size: 2em;
+    color: #00ff99;
+  }
+  #countdown {
+    font-size: 3em;
+    color: yellow;
+    margin-top: 10px;
+  }
+  #overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  #overlay button {
+    padding: 12px 20px;
+    font-size: 1.1em;
+    background: #00ff99;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card" role="region" aria-label="Independence Day prank demo">
-      <header>
-        <div class="dot" aria-hidden></div>
-        <div>
-          <h1>14 August — Independence Day Demo</h1>
-          <p class="sub">Designed by Anas Mughal — Safe visual prank</p>
-        </div>
-      </header>
 
-      <div class="terminal" id="term">
-        <div class="line">Local Independence Day Display — safe demo</div>
-        <div class="line" style="color:var(--muted)">Use START SHOW to begin the 60s full-screen effect. Ask permission first.</div>
-      </div>
+<canvas id="fireworks"></canvas>
+<img id="flag" src="https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg" width="200">
 
-      <div class="controls">
-        <button id="start" class="primary">START SHOW</button>
-        <button id="stop">STOP</button>
-        <button id="lang">Urdu / English</button>
-      </div>
+<div id="overlay">
+  <h1>🎆 14 August — Sohni Dharti Special 🎆</h1>
+  <p>Designed by <strong>Anas Mughal</strong></p>
+  <button id="startBtn">START SHOW</button>
+</div>
 
-      <div class="flagMini" aria-hidden>
-        <div class="cres"></div>
-        <div class="starMini"></div>
-      </div>
+<h1>🇵🇰 Happy Independence Day! 🇵🇰</h1>
+<p>Designed by Anas Mughal</p>
+<div id="countdown">60</div>
 
-      <div class="big-banner" id="banner" style="display:none">
-        Happy Independence Day! <br>
-        Designed by: <strong>Anas Mughal</strong>
-      </div>
-
-      <footer>Tip: This is only a visual prank. Do not use on unwilling people.</footer>
-    </div>
-  </div>
-
-  <!-- overlay (hidden by default) -->
-  <div id="prankOverlay" style="display:none" aria-hidden="true">
-    <div id="overlayMsg">Device appears locked — please wait. (This is a harmless visual demo.)</div>
-    <div id="count">60</div>
-    <button id="closeBtn" style="display:none">Exit Early</button>
-  </div>
+<audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop></audio>
 
 <script>
-(function(){
-  const start = document.getElementById('start');
-  const stop = document.getElementById('stop');
-  const langBtn = document.getElementById('lang');
-  const banner = document.getElementById('banner');
-  const overlay = document.getElementById('prankOverlay');
-  const countEl = document.getElementById('count');
-  const closeBtn = document.getElementById('closeBtn');
+// Fireworks effect
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+let particles = [];
 
-  let timers = [];
-  let running = false;
-  let useUrdu = false;
-  let seconds = 60;
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 
-  const speechEN = "Attention. Device is busy. Happy Independence Day from Anas Mughal. Please wait.";
-  const speechUR = "توجہ۔ آلہ مصروف ہے۔ یومِ آزادی مبارک۔ انعام: اناس مغل۔ براہ کرم انتظار کریں۔";
+function createParticle() {
+  const x = Math.random() * canvas.width;
+  const y = Math.random() * canvas.height / 2;
+  const radius = Math.random() * 3 + 2;
+  const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+  const speedX = (Math.random() - 0.5) * 4;
+  const speedY = (Math.random() - 0.5) * 4;
+  particles.push({ x, y, radius, color, speedX, speedY, alpha: 1 });
+}
 
-  function clearTimers(){ while(timers.length) clearTimeout(timers.pop()); }
-
-  function speak(text){
-    // use Web Speech API; will play only after a user gesture (Start click)
-    try {
-      if(window.speechSynthesis){
-        window.speechSynthesis.cancel();
-        const ut = new SpeechSynthesisUtterance(text);
-        ut.lang = useUrdu ? 'ur-PK' : 'en-US';
-        ut.rate = 1;
-        ut.pitch = 1;
-        window.speechSynthesis.speak(ut);
-      }
-    } catch(e){ console.warn("TTS not available", e); }
-  }
-
-  function enterFullScreen(){
-    const el = document.documentElement;
-    if(el.requestFullscreen) el.requestFullscreen().catch(()=>{});
-    else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen().catch(()=>{});
-  }
-  function exitFullScreen(){
-    if(document.exitFullscreen) document.exitFullscreen().catch(()=>{});
-    else if(document.webkitExitFullscreen) document.webkitExitFullscreen().catch(()=>{});
-  }
-
-  function startPrank(){
-    if(running) return;
-    running = true;
-    seconds = 60;
-    overlay.style.display = 'flex';
-    overlay.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-    // try to go fullscreen (may require user gesture; Start click counts)
-    enterFullScreen();
-    // disable pointer events on the page behind
-    document.querySelector('.wrap').style.pointerEvents = 'none';
-    // announce
-    speak(useUrdu ? speechUR : speechEN);
-
-    // update countdown visually
-    countEl.textContent = seconds;
-    // schedule countdown every second
-    for(let i=1;i<=seconds;i++){
-      timers.push(setTimeout(()=> {
-        countEl.textContent = (seconds - i).toString();
-        // little visual confetti bursts during countdown:
-        if(i % 5 === 0) createMiniConfetti();
-      }, i*1000));
+function updateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach((p, i) => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.alpha -= 0.01;
+    if (p.alpha <= 0) {
+      particles.splice(i, 1);
     }
-    // finish after seconds
-    timers.push(setTimeout(() => {
-      endPrank();
-    }, (seconds+1)*1000));
-    // show close button after 10s (so prank isn't permanent)
-    timers.push(setTimeout(()=>{ closeBtn.style.display = 'inline-block'; }, 10000));
-  }
+    ctx.globalAlpha = p.alpha;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
 
-  function endPrank(){
-    clearTimers();
-    running = false;
-    overlay.style.display = 'none';
-    overlay.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-    document.querySelector('.wrap').style.pointerEvents = '';
-    exitFullScreen();
-    // small celebration and banner
-    banner.style.display = 'block';
-    speak(useUrdu ? "ختم شد۔ یومِ آزادی مبارک!" : "Finished. Happy Independence Day!");
-    // hide close button again
-    closeBtn.style.display = 'none';
+function animate() {
+  requestAnimationFrame(animate);
+  if (Math.random() < 0.1) {
+    for (let i = 0; i < 50; i++) createParticle();
   }
+  updateParticles();
+}
+animate();
 
-  function stopPrankImmediate(){
-    if(!running) return;
-    endPrank();
-  }
-
-  // small confetti pieces (visual only)
-  function createMiniConfetti(){
-    const root = document.getElementById('prankOverlay');
-    for(let i=0;i<12;i++){
-      const c = document.createElement('div');
-      c.style.position='absolute'; c.style.left = (20 + Math.random()*60) + '%';
-      c.style.top = (10 + Math.random()*10) + '%';
-      c.style.width = (6 + Math.random()*8) + 'px';
-      c.style.height = (10 + Math.random()*12) + 'px';
-      c.style.background = Math.random()>0.5 ? '#00a86b' : '#ffffff';
-      c.style.opacity = '0.95';
-      c.style.borderRadius = '2px';
-      c.style.transform = 'rotate(' + (Math.random()*360) + 'deg)';
-      c.style.transition = 'top 2s linear, opacity 1.7s';
-      root.appendChild(c);
-      setTimeout(()=>{ c.style.top = (80 + Math.random()*10) + '%'; c.style.opacity = '0'; }, 50);
-      setTimeout(()=>{ c.remove(); }, 1900);
+// Countdown
+let countdownInterval;
+function startCountdown() {
+  let timeLeft = 60;
+  document.getElementById('countdown').textContent = timeLeft;
+  countdownInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById('countdown').textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(countdownInterval);
+      allowExit = true;
+      alert("🎉 Happy Independence Day from Anas Mughal! 🎉");
     }
-  }
+  }, 1000);
+}
 
-  // Button handlers
-  start.addEventListener('click', () => {
-    // first click triggers start (and allows speech/fullscreen)
-    startPrank();
-  });
-  stop.addEventListener('click', stopPrankImmediate);
-  closeBtn.addEventListener('click', endPrank);
-  langBtn.addEventListener('click', () => {
-    useUrdu = !useUrdu;
-    langBtn.textContent = useUrdu ? "Show English" : "Urdu / English";
-  });
+// Prevent exit feeling
+let allowExit = false;
+window.onbeforeunload = function() {
+  if (!allowExit) return "Please wait until the celebration is complete!";
+};
+document.addEventListener('contextmenu', e => {
+  if (!allowExit) e.preventDefault();
+});
+history.pushState(null, null, location.href);
+window.addEventListener('popstate', function() {
+  if (!allowExit) history.pushState(null, null, location.href);
+});
 
-  // safety: if user navigates away or page hidden, end prank
-  document.addEventListener('visibilitychange', () => { if(document.hidden) endPrank(); });
-
-})();
+// Start button
+document.getElementById('startBtn').addEventListener('click', () => {
+  document.getElementById('overlay').style.display = 'none';
+  const music = document.getElementById('bgMusic');
+  music.play();
+  startCountdown();
+});
 </script>
+
 </body>
 </html>

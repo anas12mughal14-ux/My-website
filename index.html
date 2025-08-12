@@ -1,56 +1,57 @@
-<!-- 14_aug_shareable_prank.html -->
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>14 August — Harmless Demo</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>14 August — Happy Independence Day 🇵🇰</title>
 <style>
-  :root{--bg:#03120f;--green:#00a86b;--white:#fff;--muted:#9fbfb0;--mono:"Courier New",monospace}
+  :root{
+    --bg1:#001913; --bg2:#03120f; --accent:#00a86b; --white:#fff;
+    --muted:#9fbfb0; --mono: "Courier New", monospace;
+  }
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,#001913,#03120f);font-family:var(--mono);color:var(--white);-webkit-font-smoothing:antialiased}
+  html,body{height:100%;margin:0;font-family:var(--mono);background:linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--white);-webkit-font-smoothing:antialiased}
   .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:18px}
-  .card{width:100%;max-width:980px;background:rgba(255,255,255,0.02);border-radius:14px;padding:14px;box-shadow:0 14px 60px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02)}
-  header{display:flex;gap:10px;align-items:center;margin-bottom:10px}
-  .dot{width:12px;height:12px;border-radius:3px;background:linear-gradient(90deg,var(--green),#2fe4a6);box-shadow:0 6px 18px rgba(0,168,107,0.18)}
-  h1{margin:0;font-size:16px}
+  .card{width:100%;max-width:980px;background:rgba(255,255,255,0.02);border-radius:14px;padding:16px;box-shadow:0 14px 50px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
+  header{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+  .dot{width:14px;height:14px;border-radius:4px;background:linear-gradient(90deg,var(--accent),#2fe4a6);box-shadow:0 6px 18px rgba(0,168,107,0.15)}
+  h1{margin:0;font-size:18px}
   p.sub{margin:0;color:var(--muted);font-size:13px}
-  .terminal{background:rgba(1,4,6,0.6);border-radius:10px;padding:12px;color:#c9fff0;min-height:260px;max-height:60vh;overflow:auto;border:1px solid rgba(255,255,255,0.02)}
-  .line{white-space:pre-wrap;font-size:14px;line-height:1.45}
+  .terminal{background:rgba(1,4,6,0.55);border-radius:10px;padding:12px;color:#c9fff0;min-height:240px;max-height:60vh;overflow:auto;border:1px solid rgba(255,255,255,0.02)}
+  .line{white-space:pre-wrap;font-size:15px;line-height:1.45}
   .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;justify-content:center}
-  button{flex:1 1 140px;min-width:120px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--white);font-family:var(--mono);font-size:14px}
-  button.primary{background:linear-gradient(90deg,var(--green),#26d6a0);border:none;color:#022;box-shadow:0 8px 24px rgba(0,168,107,0.12)}
+  button{flex:1 1 140px;min-width:120px;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--white);font-family:var(--mono);font-size:14px;cursor:pointer}
+  button.primary{background:linear-gradient(90deg,var(--accent),#26d6a0);border:none;color:#022;box-shadow:0 8px 24px rgba(0,168,107,0.09)}
   .flagMini{height:80px;border-radius:8px;background:linear-gradient(180deg,#085f3f,#046447);position:relative;margin-top:10px}
-  .cres{position:absolute;left:18%;top:24%;width:46px;height:46px;border-radius:50%;background:var(--white);transform:rotate(-12deg)}
+  .cres{position:absolute;left:18%;top:22%;width:46px;height:46px;border-radius:50%;background:var(--white);transform:rotate(-12deg)}
   .cres::after{content:"";position:absolute;left:12px;top:6px;width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,#085f3f,#046447)}
   .starMini{position:absolute;left:38%;top:18%;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:14px solid var(--white);transform:rotate(32deg)}
-  .big-banner{margin-top:12px;padding:14px;border-radius:10px;text-align:center;font-weight:700;font-size:18px;color:#012b1f;background:linear-gradient(90deg,#bfffe8,#e8fff9);box-shadow:0 8px 24px rgba(0,168,107,0.08)}
+  .big-banner{margin-top:12px;padding:14px;border-radius:10px;text-align:center;font-weight:700;font-size:18px;color:#012b1f;background:linear-gradient(90deg,#bfffe8,#e8fff9);box-shadow:0 8px 24px rgba(0,168,107,0.06)}
   footer{margin-top:10px;color:var(--muted);font-size:13px;text-align:center}
-  /* confetti */
   .confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:9999}
-  @media (max-width:420px){ .terminal{min-height:200px} h1{font-size:15px} .controls{gap:6px} }
+  @media (max-width:420px){ .terminal{min-height:200px} h1{font-size:16px} .controls{gap:6px} }
 </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card" role="region" aria-label="14 August prank demo">
+    <div class="card" role="region" aria-label="Independence Day demo">
       <header>
         <div class="dot" aria-hidden></div>
         <div>
-          <h1>14 August — Harmless Patriot Prank (Demo)</h1>
-          <p class="sub">Local display only. No network or file access. Use with permission 🇵🇰</p>
+          <h1>14 August — Happy Independence Day 🇵🇰</h1>
+          <p class="sub">Designed by Anas Mughal — Share with friends!</p>
         </div>
       </header>
 
       <div class="terminal" id="term" tabindex="0" aria-live="polite">
-        <div class="line">Local Independence Day Display — harmless demo</div>
+        <div class="line">Local Independence Day Display — safe demo</div>
         <div class="line" style="color:var(--muted)">Press START. Rotate phone to landscape for bigger effect.</div>
       </div>
 
       <div class="controls">
         <button id="start" class="primary">START SHOW</button>
         <button id="stop">STOP</button>
-        <button id="lang">Urdu / Hinglish</button>
+        <button id="lang">Urdu / English</button>
       </div>
 
       <div class="flagMini" aria-hidden>
@@ -59,13 +60,13 @@
       </div>
 
       <div class="big-banner" id="banner" style="display:none">
-        Pakistan Hackers Union — Happy Independence Day! <br>
-        Presented by: <span id="presenter">Anas Mughal</span>
+        Happy Independence Day! <br>
+        Designed by: <span id="presenter">Anas Mughal</span>
       </div>
 
       <div class="confetti" id="confetti"></div>
 
-      <footer>Tip: Ask permission first. This is only a visual prank.</footer>
+      <footer>Tip: Ask permission before showing on someone else's device.</footer>
     </div>
   </div>
 
@@ -83,26 +84,22 @@
   let timers = [];
 
   const EN = [
-    "=== PAK-HACK EMULATOR (DEMO) ===",
-    "Init: patriotic-mode -> ENGAGED",
-    "Target: local-display (simulated)",
-    "Loading flag shader...",
+    "=== INDEPENDENCE DAY DEMO ===",
+    "Initializing patriotic display...",
+    "Preparing flag visuals...",
     "Applying green & white glow...",
-    "Deploying celebratory banner: Pakistan Hackers Union",
-    "Message: 'Happy Independence Day!'",
-    "Launching small visual fireworks...",
-    "Finalizing display... enjoy the show!"
+    "Launching celebratory confetti...",
+    "Displaying banner: Happy Independence Day!",
+    "Enjoy the celebration!"
   ];
   const UR = [
-    "=== PAK-HACK EMULATOR (DEMO) ===",
-    "شروع: patriotic-mode آن",
-    "ٹارگٹ: local-display (نمونہ)",
-    "جھنڈا اثر لوڈ ہو رہا ہے...",
-    "ہری اور سفید روشنی چالو ہو گئی...",
-    "بینر لگایا گیا: Pakistan Hackers Union",
-    "پیغام: 'یومِ آزادی مبارک!'",
-    "چھوٹی آتشبازی دکھائی جا رہی ہے...",
-    "ختم! لطف اٹھائیں!"
+    "=== یومِ آزادی ڈیمو ===",
+    "تیاری ہو رہی ہے...",
+    "جھنڈے کے مناظر تیار ہو رہے ہیں...",
+    "سبز اور سفید روشنی دکھائی جا رہی ہے...",
+    "خوشی کے اظہار کے لئے کنفیٹی!",
+    "بینر ظاہر ہو رہا ہے: یومِ آزادی مبارک!",
+    "لطف اٹھائیں!"
   ];
 
   function clearTerm(){ term.innerHTML=''; }
@@ -117,13 +114,13 @@
   }
 
   function confettiBurst(){
-    // small ephemeral confetti pieces
-    for(let i=0;i<18;i++){
+    for(let i=0;i<20;i++){
       const c = document.createElement('div');
       c.style.position='fixed'; c.style.zIndex=9999;
       c.style.left = (10 + Math.random()*80) + '%';
       c.style.top = '-10px';
-      c.style.width = '8px'; c.style.height='12px';
+      c.style.width = (6 + Math.random()*10) + 'px';
+      c.style.height = (10 + Math.random()*14) + 'px';
       c.style.background = Math.random()>0.5 ? '#00a86b' : '#ffffff';
       c.style.borderRadius='2px'; c.style.opacity='0.95';
       confRoot.appendChild(c);
@@ -138,21 +135,21 @@
     appendLine(msgs[0]);
     let t=600;
     for(let i=1;i<msgs.length;i++){
-      schedule(()=>{ appendLine(msgs[i]); if(i===4||i===6||i===8) confettiBurst(); }, t);
+      schedule(()=>{ appendLine(msgs[i]); if(i%2===0) confettiBurst(); }, t);
       t += 700;
     }
-    schedule(()=>{ appendLine(""); appendLine(useUrdu ? ">>> Pakistan Hackers Union: یومِ آزادی مبارک!" : ">>> Pakistan Hackers Union: Happy Independence Day!"); banner.style.display='block'; confettiBurst(); openFullscreen(); running=false; }, t);
+    schedule(()=>{ appendLine(""); appendLine(useUrdu ? ">>> یومِ آزادی مبارک!" : ">>> Happy Independence Day!"); banner.style.display='block'; confettiBurst(); openFullscreen(); running=false; }, t);
   }
 
   start.addEventListener('click', runSequence);
   stop.addEventListener('click', ()=>{ running=false; clearTimers(); appendLine("** Show stopped **"); banner.style.display='none'; });
-  langBtn.addEventListener('click', ()=>{ useUrdu=!useUrdu; langBtn.textContent = useUrdu ? "Show English" : "Urdu / Hinglish"; appendLine(useUrdu ? "زبان: اردو" : "Language: English"); });
+  langBtn.addEventListener('click', ()=>{ useUrdu=!useUrdu; langBtn.textContent = useUrdu ? "Show English" : "Urdu / English"; appendLine(useUrdu ? "زبان: اردو" : "Language: English"); });
 
-  // initialize with the presenter's name already set (Anas Mughal)
+  // Set presenter's name (now fixed as Anas Mughal)
   document.getElementById('presenter').textContent = 'Anas Mughal';
 
-  appendLine("Local Independence Day Display — harmless demo");
-  appendLine("Press START. Rotate phone for bigger view. Ask permission before showing.");
+  appendLine("Local Independence Day Display — safe demo");
+  appendLine("Press START. Rotate phone for best view.");
 })();
 </script>
 </body>
